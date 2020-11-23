@@ -1,7 +1,7 @@
-"""sarpanch URL Configuration
+"""ypc_blog URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.1/topics/http/urls/
+    https://docs.djangoproject.com/en/3.0/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -14,8 +14,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.contrib.sitemaps.views import sitemap
+from django.urls import path, include, re_path
+
+
+# sitemaps = {
+# }
+
 
 urlpatterns = [
+    path('admin_tools/', include('admin_tools.urls')),
     path('admin/', admin.site.urls),
+    re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    # path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    path('', include('accounts.urls')),
+
 ]
+

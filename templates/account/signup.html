@@ -1,0 +1,27 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+<div class="container shadow-lg text-center align-middle mt-6 pt-5 pb-3 px-2" style="margin-top: 20px; padding: 10px; border-radius: 10px; max-width: 430px; justify-content: center;">
+
+	<div>
+		<img alt="favicon" class="img-responsive img-round" src="{% static 'common/img/logo-small-round.png' %}" style="max-width: 100px">
+		<h1>{% trans "Sign Up" %}</h1>
+
+		<h6>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</h6>
+
+		<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+		  {% csrf_token %}
+		  {{ form | crispy }}
+		  {% if redirect_field_value %}
+		  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+		  {% endif %}
+		  <button class="btn btn-info" type="submit">{% trans "Sign Up" %} &raquo;</button>
+		</form>
+	</div>
+</div>
+{% endblock %}
