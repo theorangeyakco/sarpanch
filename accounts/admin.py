@@ -1,14 +1,15 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from accounts.models import User
+from .forms import UpdateUserForm, AddUserForm
+from .models import User
 
 
 class UserAdmin(BaseUserAdmin):
-	# form = UpdateUserForm
-	# add_form = AddUserForm
+	form = UpdateUserForm
+	add_form = AddUserForm
 
-	list_display = ('phone', 'email', 'name', 'date_joined', 'is_staff')
+	list_display = ('phone', 'username', 'email', 'name', 'date_joined', 'is_staff')
 	list_filter = ('is_staff', 'is_active')
 	fieldsets = (
 		(None, {'fields': ('email', 'password')}),

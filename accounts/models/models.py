@@ -53,7 +53,7 @@ class User(AbstractBaseUser, PermissionsMixin, UserData):
 	                             message="Phone number must be entered in the format: '+999999999'. Up to 14 digits allowed.")
 
 	phone = models.CharField(validators=[phone_regex], max_length=17, primary_key=True)
-	username = models.CharField(max_length=32, unique=True)
+	username = models.CharField(max_length=32, unique=True, null=True, blank=True)
 	# password field supplied by AbstractBaseUser
 	# last_login field supplied by AbstractBaseUser
 

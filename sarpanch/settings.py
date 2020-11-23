@@ -245,12 +245,12 @@ JAZZMIN_SETTINGS = {
 	'site_logo'      : 'common/img/logo-small-round.png',
 	'welcome_sign'   : 'Welcome to Sarpanch App Management',
 	'copyright'      : 'The Orange Yak Co.',
-	'search_model'   : 'main.User',
+	'search_model'   : 'accounts.User',
 
 	'topmenu_links'  : [{'name': 'Site Home', 'url': 'index'}],
 
 	'icons'          : {
-		'main.User': 'fas fa-users-cog',
+		'accounts.User': 'fas fa-users-cog',
 	},
 
 	'usermenu_links' : [
