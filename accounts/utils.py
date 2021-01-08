@@ -1,11 +1,12 @@
+from os import getenv
 from random import randint
 
 from requests import get
 
 
-def otp_generator():
+def otp_generator() -> str:
 	otp = randint(999, 9999)
-	return otp
+	return str(otp)
 
 
 def send_otp(phone):
@@ -14,14 +15,13 @@ def send_otp(phone):
 	passed phone number as argument.
 	"""
 	SENDER_ID = "SRPNCH"
-	API_KEY = ""
+	API_KEY = getenv("SMS_API_KEY")
 	TEMPLATE_NAME = "OTP%20Validation"
 
 	if phone:
 
-		key = otp_generator()
+		otp_key = otp_generator()
 		phone = str(phone)
-		otp_key = str(key)
 		name = "user"
 
 		link = f"https://2factor.in/API/R1/?" \
@@ -33,8 +33,11 @@ def send_otp(phone):
 		       f"var1={name}&" \
 		       f"var2={otp_key}"
 
-		# result = get(link, verify=False)
-
-		return otp_key
+		response = get(link, verify=False)
+		if 200 <= response.status_code < 300:
+			return otp_key
+		else:
+			print(f"Error: 2factor.in returned status code {response.status_code}.", response)
+			return False
 	else:
 		return False
