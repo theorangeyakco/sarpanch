@@ -3,6 +3,9 @@ from os import getenv
 from random import randint
 
 from requests import get
+from rest_framework.generics import get_object_or_404
+
+from accounts.models import User
 
 
 def otp_generator() -> str:
@@ -10,7 +13,7 @@ def otp_generator() -> str:
 	return str(otp)
 
 
-def send_otp(phone):
+def _send_otp(phone, forgot=False):
 	"""
 	This is an helper function to send otp to session stored phones or
 	passed phone number as argument.
@@ -23,8 +26,14 @@ def send_otp(phone):
 
 		otp_key = otp_generator()
 		phone = str(phone)
-		name = "user"
-
+		if not forgot:
+			name = "user"
+		else:
+			user = get_object_or_404(User, phone__iexact=phone)
+			if user.name:
+				name = user.name
+			else:
+				name = user.phone
 		link = f"https://2factor.in/API/R1/?" \
 		       f"module=TRANS_SMS" \
 		       f"&apikey={API_KEY}&" \
@@ -34,16 +43,23 @@ def send_otp(phone):
 		       f"var1={name}&" \
 		       f"var2={otp_key}"
 
-		# response = get(link, verify=True)
-		# if 200 <= response.status_code < 300:
-		# 	return otp_key
-		# else:
-		# 	print(f"Error: 2factor.in returned status code {response.status_code}.", response)
-		# 	return False
-		print(otp_key)
-		return otp_key
+		response = get(link, verify=True)
+		if 200 <= response.status_code < 300:
+			return otp_key
+		else:
+			print(f"Error: 2factor.in returned status code {response.status_code}.", response)
+			return False
+
 	else:
 		return False
+
+
+def send_otp(phone):
+	return _send_otp(phone)
+
+
+def send_otp_forgot(phone):
+	return _send_otp(phone, forgot=True)
 
 
 def password_valid(password: str) -> bool:

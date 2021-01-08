@@ -72,3 +72,11 @@ class ChangePasswordSerializer(serializers.Serializer):
     # password_1 can be old password or new password
     password_2 = serializers.CharField(required=True)
     # password_2 can be new password or confirm password according to apiview
+
+
+class ForgetPasswordSerializer(serializers.Serializer):
+    """
+    Used for resetting password who forget their password via otp varification
+    """
+    phone = serializers.CharField(required=True)
+    password = serializers.CharField(required=True)

@@ -96,6 +96,8 @@ class PhoneOTP(models.Model):
 	otp = models.CharField(max_length=9, blank=True, null=True)
 	count = models.PositiveSmallIntegerField(default=0, help_text="Number of OTPs sent")
 	validated = models.BooleanField(default=False)
+	forgot = models.BooleanField(default=False, help_text='only true for forgot password')
+	forgot_logged = models.BooleanField(default=False, help_text='Only true if validate otp forgot is successful')
 
 	def __str__(self):
 		return f"{self.phone} got {self.otp}"
