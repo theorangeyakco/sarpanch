@@ -39,6 +39,7 @@ djangorestframework = "*"
 markdown = "*"
 django-filter = "*"
 django-rest-auth = "*"
+django-rest-knox = "*"
 
 [requires]
 python_full_version = "3.8.2"

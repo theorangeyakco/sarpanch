@@ -1,5 +1,6 @@
 import contextlib
 import os
+from datetime import timedelta
 
 import dj_database_url
 from dotenv import load_dotenv
@@ -122,8 +123,6 @@ INSTALLED_APPS = [
 	'whitenoise.runserver_nostatic',  # Needs to be first
 
 	'rest_framework',
-	'rest_framework.authtoken',
-	'rest_auth',
 
 	'jazzmin',
 
@@ -144,7 +143,7 @@ INSTALLED_APPS = [
 	'ckeditor',
 	'ckeditor_uploader',
 	'taggit',
-
+	'knox',
 	# Custom apps
 	'accounts',
 ]
@@ -185,11 +184,6 @@ TEMPLATES = [
 	},
 ]
 
-AUTHENTICATION_BACKENDS = (
-	'django.contrib.auth.backends.ModelBackend',
-	'allauth.account.auth_backends.AuthenticationBackend',
-)
-
 AUTH_PASSWORD_VALIDATORS = [
 	{'NAME':
 		 'django.contrib.auth.password_validation'
@@ -202,6 +196,15 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # External Application Settings
+
+REST_FRAMEWORK = {
+	'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',)
+}
+
+REST_KNOX = {
+	'USER_SERIALIZER': 'accounts.serializer.UserSerializer',
+	'TOKEN_TTL': timedelta(hours=24*7)
+}
 
 # django taggit settings
 TAGGIT_CASE_INSENSITIVE = True

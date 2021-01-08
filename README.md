@@ -16,3 +16,18 @@ The code for the promo website is is `/landing`. `/landing/README.md` has more i
 * `pipenv run python manage.py runserver` 
 
 You're good to go!
+
+
+## Notes
+#### User Authentication Classes on an APIView
+```python
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+from knox.auth import TokenAuthentication
+
+class SomeView(APIView):
+    # ...
+    permission_classes =  (IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
+    # ...
+```

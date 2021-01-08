@@ -8,17 +8,14 @@ from .mixins import UserData
 
 
 class UserManager(BaseUserManager):
-	def _create_user(self, phone, password, username, **extra, ):
+	def _create_user(self, phone, password, **extra, ):
 		if not phone:
 			raise ValueError('Phone number must be set!')
 
 		if not password:
 			raise ValueError('Password must be set!')
-		if not username:
-			raise ValueError('Username  must be set!')
 
 		user = self.model(
-				username=username,
 				phone=phone,
 				**extra
 		)
@@ -26,25 +23,25 @@ class UserManager(BaseUserManager):
 		user.save(using=self._db)
 		return user
 
-	def create_user(self, phone, password, username, **extra):
+	def create_user(self, phone, password, **extra):
 		extra.setdefault('is_staff', False)
 		extra.setdefault('is_superuser', False)
 		return self._create_user(
-				phone, password, username, **extra
+				phone, password, **extra
 		)
 
-	def create_staffuser(self, username, phone, password, **extra):
+	def create_staffuser(self, phone, password, **extra):
 		extra['is_staff'] = True
 		extra['is_superuser'] = False
 		return self._create_user(
-				phone, password, username, **extra
+				phone, password, **extra
 		)
 
-	def create_superuser(self, username, phone, password, **extra):
+	def create_superuser(self, phone, password, **extra):
 		extra['is_staff'] = True
 		extra['is_superuser'] = True
 		return self._create_user(
-				phone, password, username, **extra
+				phone, password, **extra
 		)
 
 
@@ -56,7 +53,7 @@ class User(AbstractBaseUser, PermissionsMixin, UserData):
 	username = models.CharField(max_length=32, unique=True, null=True, blank=True)
 	# password field supplied by AbstractBaseUser
 	# last_login field supplied by AbstractBaseUser
-
+	first_login = models.BooleanField(default=True)
 	# user data supplied by UserData mixin
 
 	date_joined = models.DateTimeField('date joined', default=timezone.now)

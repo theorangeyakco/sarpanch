@@ -1,15 +1,20 @@
 from random import random
 
+from django.contrib.auth import login
 from django.db import IntegrityError
 from django.shortcuts import get_object_or_404
+from rest_framework import permissions
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from .models import User
 from .models.models import PhoneOTP
-from .serializer import CreateUserSerializer
+from .serializer import CreateUserSerializer, LoginSerializer
 from .utils import send_otp, password_valid
+
+from knox.views import LoginView as KnoxLoginView
+from knox.auth import TokenAuthentication
 
 
 class ValidatePhoneAndSendOTP(APIView):
@@ -151,3 +156,22 @@ class Register(APIView):
 				'status': False,
 				'detail': 'Please enter both the phone number and the password'
 			})
+
+
+class Login(KnoxLoginView):
+	permission_classes = (permissions.AllowAny,)
+
+	def post(self, request, format=None):
+		serializer = LoginSerializer(data=request.data)
+		serializer.is_valid(raise_exception=True)
+		user = serializer.validated_data['user']
+		if user.last_login is None:
+			user.first_login = True
+			user.save()
+
+		elif user.first_login:
+			user.first_login = False
+			user.save()
+
+		login(request, user)
+		return super(Login, self).post(request, format=None)

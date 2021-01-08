@@ -17,7 +17,7 @@ def send_otp(phone):
 	"""
 	SENDER_ID = "SRPNCH"
 	API_KEY = getenv("SMS_API_KEY")
-	TEMPLATE_NAME = "OTP%20Validation"
+	TEMPLATE_NAME = "OTP%20Validation"  # needs to be url friendly
 
 	if phone:
 
@@ -34,12 +34,14 @@ def send_otp(phone):
 		       f"var1={name}&" \
 		       f"var2={otp_key}"
 
-		response = get(link, verify=True)
-		if 200 <= response.status_code < 300:
-			return otp_key
-		else:
-			print(f"Error: 2factor.in returned status code {response.status_code}.", response)
-			return False
+		# response = get(link, verify=True)
+		# if 200 <= response.status_code < 300:
+		# 	return otp_key
+		# else:
+		# 	print(f"Error: 2factor.in returned status code {response.status_code}.", response)
+		# 	return False
+		print(otp_key)
+		return otp_key
 	else:
 		return False
 
