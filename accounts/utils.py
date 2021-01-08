@@ -1,3 +1,4 @@
+import re
 from os import getenv
 from random import randint
 
@@ -41,3 +42,10 @@ def send_otp(phone):
 			return False
 	else:
 		return False
+
+
+def password_valid(password: str) -> bool:
+	regex = re.compile(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,20}$")
+	if re.search(regex, password):
+		return True
+	return False

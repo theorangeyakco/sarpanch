@@ -8,7 +8,8 @@ from rest_framework.response import Response
 
 from .models import User
 from .models.models import PhoneOTP
-from .utils import send_otp
+from .serializer import CreateUserSerializer
+from .utils import send_otp, password_valid
 
 
 class ValidatePhoneAndSendOTP(APIView):
@@ -65,6 +66,7 @@ class ValidateOTP(APIView):
 	If the user has already received the OTP then this requests validates that OTP
 	against the phone number provided, and allows the user to proceed to registration.
 	"""
+
 	@staticmethod
 	def post(request, *args, **kwargs):
 		phone = request.data.get('phone_number', False)
@@ -103,15 +105,37 @@ class Register(APIView):
 	def post(request, *args, **kwargs):
 		phone = request.data.get('phone_number', False)
 		password = request.data.get('password', False)
+		email = request.data.get('email', False)
+		name = request.data.get('name')
 		# REVIEW: What are the other fields that we want to get during
 		#  registration
 
-		if phone and password:
+		if (type(phone) == str and type(password) == str and type(name) == str and type(email) == str):
 			old = PhoneOTP.objects.filter(phone__iexact=phone)
 			if old.exists():
+				old = old.first()
 				if old.validated:
-					# TODO: Create user and return login token
-					pass
+					if password_valid(password):
+						temp_data = {
+							'phone'   : phone,
+							'password': password,
+							'name'    : name,
+							'email'   : email
+						}
+						serializer = CreateUserSerializer(data=temp_data)
+						serializer.is_valid(raise_exception=True)
+						user = serializer.save()
+						old.delete()
+						return Response({
+							'status': True,
+							'detail': 'Account created'
+						})
+					else:
+						return Response({
+							'status': False,
+							'detail': 'Invalid password: Password should have at least one digit, one uppercase and one'
+							          ' lowercase character, one special character, and should be 6 to 20 characters long'
+						})
 				else:
 					return Response({
 						'status': False,
