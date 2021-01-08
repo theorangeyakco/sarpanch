@@ -3,14 +3,14 @@ from random import random
 from django.contrib.auth import login
 from django.db import IntegrityError
 from django.shortcuts import get_object_or_404
-from rest_framework import permissions
+from rest_framework import permissions, generics, status
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from .models import User
 from .models.models import PhoneOTP
-from .serializer import CreateUserSerializer, LoginSerializer
+from .serializer import CreateUserSerializer, LoginSerializer, ChangePasswordSerializer
 from .utils import send_otp, password_valid
 
 from knox.views import LoginView as KnoxLoginView
@@ -175,3 +175,47 @@ class Login(KnoxLoginView):
 
 		login(request, user)
 		return super(Login, self).post(request, format=None)
+
+
+class ChangePassword(generics.UpdateAPIView):
+	"""
+	Change password endpoint view
+	"""
+	authentication_classes = (TokenAuthentication,)
+	serializer_class = ChangePasswordSerializer
+	permission_classes = [permissions.IsAuthenticated, ]
+
+	def get_object(self, queryset=None):
+		"""
+		Returns current logged in user instance
+		"""
+		obj = self.request.user
+		return obj
+
+	def update(self, request, *args, **kwargs):
+		self.object = self.get_object()
+		serializer = self.get_serializer(data=request.data)
+
+		if serializer.is_valid():
+			if not self.object.check_password(serializer.data.get('password_1')):
+				return Response({
+					'status'          : False,
+					'current_password': 'The current password does not match your password.',
+				}, status=status.HTTP_400_BAD_REQUEST)
+
+			if not password_valid(serializer.data.get('password_2')):
+				return Response({
+					'status': False,
+					'detail': 'Invalid password: Password should have at least one digit, one uppercase and one'
+					          ' lowercase character, one special character, and should be 6 to 20 characters long'
+				})
+
+			self.object.set_password(serializer.data.get('password_2'))
+			self.object.password_changed = True
+			self.object.save()
+			return Response({
+				"status": True,
+				"detail": "Password has been successfully changed.",
+			})
+
+		return Response(serializer.error, status=status.HTTP_400_BAD_REQUEST)

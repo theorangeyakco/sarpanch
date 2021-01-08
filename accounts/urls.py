@@ -1,7 +1,7 @@
 from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
 
-from .views import ValidatePhoneAndSendOTP, ValidateOTP, Register, Login
+from .views import ValidatePhoneAndSendOTP, ValidateOTP, Register, Login, ChangePassword
 from knox import views as knox_views
 
 app_name = 'accounts'
@@ -12,6 +12,7 @@ urlpatterns = [
 	path('register/', csrf_exempt(Register.as_view()), name='register'),
 	path('login/', csrf_exempt(Login.as_view()), name='login'),
 	path('logout/', csrf_exempt(knox_views.LogoutView.as_view()), name='logout'),
+	path('change_password/', csrf_exempt(ChangePassword.as_view()), name='change_password'),
 
 
 ]
