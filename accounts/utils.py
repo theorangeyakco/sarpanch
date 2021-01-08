@@ -34,7 +34,7 @@ def send_otp(phone):
 		       f"var1={name}&" \
 		       f"var2={otp_key}"
 
-		response = get(link, verify=False)
+		response = get(link, verify=True)
 		if 200 <= response.status_code < 300:
 			return otp_key
 		else:
