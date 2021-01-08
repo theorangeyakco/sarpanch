@@ -110,7 +110,7 @@ class Register(APIView):
 			old = PhoneOTP.objects.filter(phone__iexact=phone)
 			if old.exists():
 				if old.validated:
-					# TODO: Fill this in.
+					# TODO: Create user and return login token
 					pass
 				else:
 					return Response({
