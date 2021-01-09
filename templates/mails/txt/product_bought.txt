@@ -1,6 +1,0 @@
-Hi, {{ user.name }}.
-
-Thank you for purchasing the {{ content_type }}: {{ product.title }}!
-You will be able to access it at: https://esorobrain.com/{{ product.get_absolute_url }}
-
-Thank you for using esorobrain.com!
