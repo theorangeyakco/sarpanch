@@ -120,8 +120,6 @@ DEFAULT_FROM_EMAIL = 'sarpanch.developers@gmail.com'
 
 # Applications and middleware
 INSTALLED_APPS = [
-	'whitenoise.runserver_nostatic',  # Needs to be first
-
 	'rest_framework',
 
 	'jazzmin',
@@ -144,8 +142,12 @@ INSTALLED_APPS = [
 	'ckeditor_uploader',
 	'taggit',
 	'knox',
+	'mptt',
+	'django_mptt_admin',
+	'django_filters',
 	# Custom apps
 	'accounts',
+	'content'
 ]
 
 SITE_ID = 2

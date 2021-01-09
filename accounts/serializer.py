@@ -62,21 +62,21 @@ class LoginSerializer(serializers.Serializer):
 
 
 class ChangePasswordSerializer(serializers.Serializer):
-    """
-    Used for both password change (Login required) and
-    password reset(No login required but otp required)
-    not using modelserializer as this serializer will be used for for two apis
-    """
+	"""
+	Used for both password change (Login required) and
+	password reset(No login required but otp required)
+	not using modelserializer as this serializer will be used for for two apis
+	"""
 
-    password_1 = serializers.CharField(required=True)
-    # password_1 can be old password or new password
-    password_2 = serializers.CharField(required=True)
-    # password_2 can be new password or confirm password according to apiview
+	password_1 = serializers.CharField(required=True)
+	# password_1 can be old password or new password
+	password_2 = serializers.CharField(required=True)
+	# password_2 can be new password or confirm password according to apiview
 
 
 class ForgetPasswordSerializer(serializers.Serializer):
-    """
-    Used for resetting password who forget their password via otp varification
-    """
-    phone = serializers.CharField(required=True)
-    password = serializers.CharField(required=True)
+	"""
+	Used for resetting password who forget their password via otp verification
+	"""
+	phone = serializers.CharField(required=True)
+	password = serializers.CharField(required=True)
