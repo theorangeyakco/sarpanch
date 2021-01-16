@@ -43,14 +43,12 @@ def _send_otp(phone, forgot=False):
 		       f"var1={name}&" \
 		       f"var2={otp_key}"
 
-		# response = get(link, verify=True)
-		# if 200 <= response.status_code < 300:
-		# 	return otp_key
-		# else:
-		# 	print(f"Error: 2factor.in returned status code {response.status_code}.", response)
-		# 	return False
-		print(f"OTP sent: {otp_key}")
-		return otp_key
+		response = get(link, verify=True)
+		if 200 <= response.status_code < 300:
+			return otp_key
+		else:
+			print(f"Error: 2factor.in returned status code {response.status_code}.", response)
+			return False
 	else:
 		return False
 
