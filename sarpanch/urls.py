@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
+from django.views.generic import TemplateView
 
 
 urlpatterns = [
@@ -22,4 +23,5 @@ urlpatterns = [
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('content/', include('content.urls', namespace='content')),
+    path('', TemplateView.as_view(template_name='landing/index.html'), name='index')
 ]

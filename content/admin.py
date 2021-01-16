@@ -7,7 +7,8 @@ from django_mptt_admin.admin import DjangoMpttAdmin
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
 	list_display = ('title', 'sub_title', 'published', 'created_on', 'updated_on')
-	list_filter = ('categories',)
+	list_filter = ('categories', 'created_on', 'updated_on', 'published')
+	date_hierarchy = 'updated_on'
 	filter_horizontal = ('categories',)
 	readonly_fields = ('slug', 'created_on', 'updated_on')
 

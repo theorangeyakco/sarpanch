@@ -42,7 +42,6 @@ class ValidatePhoneAndSendOTP(APIView):
 								'status': False,
 								'detail': 'OTP sending error. OTP limit reached. Please contact customer support.'
 							})
-						print("Count increased ", count)
 						old.count += 1
 						old.save()
 						return Response({
@@ -234,7 +233,6 @@ class ValidatePhoneForgot(APIView):
 			user = User.objects.filter(phone__iexact=phone)
 			if user.exists():
 				otp = send_otp_forgot(phone)
-				print(phone, otp)
 				if otp:
 					otp = str(otp)
 					count = 0

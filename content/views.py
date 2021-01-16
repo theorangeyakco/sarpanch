@@ -2,13 +2,16 @@ from django.shortcuts import render
 from django_filters import FilterSet, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter
+from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from knox.auth import TokenAuthentication
 
-from content.models import Post
-from content.serializers import PostSerializer
+from content.models import Post, Category
+from content.serializers import PostSerializer, CategorySerializer
 
 
 class PostFilter(FilterSet):
@@ -29,3 +32,14 @@ class PostViewSet(ReadOnlyModelViewSet):
 	queryset = Post.objects.filter(published=True)
 	serializer_class = PostSerializer
 	search_fields = ('title', 'sub_title')
+
+
+class CategoryList(APIView):
+	permission_classes = (IsAuthenticated,)
+	authentication_classes = (TokenAuthentication,)
+
+	@staticmethod
+	def get(request):
+		queryset = Category.objects.all()
+		serializer = CategorySerializer(queryset, many=True)
+		return Response(serializer.data, status=200)
