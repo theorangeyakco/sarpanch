@@ -5,6 +5,8 @@ promotional website is hosted at `sarpanch.org`. The API is built using the Djan
 Framework deployed on Heroku and the promo webiste is built in Vue and deployed using 
 Netlify. 
 
+## API Documentation:
+https://documenter.getpostman.com/view/11883658/TVzNJzGo
 
 ## Promo webiste instuctions: 
 The code for the promo website is is `/landing`. `/landing/README.md` has more information. 
