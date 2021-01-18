@@ -43,3 +43,15 @@ class CategoryList(APIView):
 		queryset = Category.objects.all()
 		serializer = CategorySerializer(queryset, many=True)
 		return Response(serializer.data, status=200)
+
+
+class CategoryDetail(APIView):
+	permission_classes = (IsAuthenticated,)
+	authentication_classes = (TokenAuthentication,)
+
+	@staticmethod
+	def get(request, pk):
+		c = get_object_or_404(Category, id=pk)
+		serializer = CategorySerializer(c)
+		return Response(serializer.data, status=200)
+

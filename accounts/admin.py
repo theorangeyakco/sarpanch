@@ -11,11 +11,11 @@ class UserAdmin(BaseUserAdmin):
 	add_form = AddUserForm
 
 	list_display = ('phone', 'username', 'email', 'name', 'date_joined', 'is_staff')
-	list_filter = ('is_staff', 'is_active')
+	list_filter = ('is_staff', 'is_active', 'is_sarpanch')
 	fieldsets = (
 		(None, {'fields': ('email', 'password')}),
 		('Personal info', {'fields': ('name', 'phone', 'gender')}),
-		('Permissions', {'fields': ('is_active', 'is_staff', 'notification_level', 'groups', 'user_permissions')}),
+		('Permissions', {'fields': ('is_active', 'is_staff', 'is_sarpanch', 'notification_level', 'groups', 'user_permissions')}),
 	)
 	add_fieldsets = (
 		(

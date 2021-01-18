@@ -65,6 +65,10 @@ class User(AbstractBaseUser, PermissionsMixin, UserData):
 			'staff status', default=False,
 			help_text='Designates whether the user can log into this admin site.',
 	)
+	is_sarpanch = models.BooleanField(
+			'Sarpanch status', default=False,
+			help_text='Designates whether the user is a validated Sarpanch.'
+	)
 
 	# is_superuser field provided by PermissionsMixin
 	# groups field provided by PermissionsMixin
