@@ -1,0 +1,25 @@
+{% extends "global/base.html" %}
+{% load static %}
+
+{% block title %}{{ message_title }}{% endblock title %}
+
+{% block css %}
+	<link rel="stylesheet" href="{% static 'common/css/message.css' %}">
+{% endblock css %}
+
+{% block js %}
+	<link rel="stylesheet" href="{% static 'common/js/message.js' %}">
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="section"></div>
+		<div class="row">
+			<div class="col s12">
+				<h3 style="text-align: center;">{{ message_heading }}</h3>
+				<h5 style="text-align: center;">{{ message|safe }}</h5>
+			</div>
+		</div>
+		<div class="section"></div>
+	</div>
+{% endblock content %}

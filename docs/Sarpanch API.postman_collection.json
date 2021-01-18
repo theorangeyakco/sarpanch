@@ -1,0 +1,2486 @@
+{
+	"info": {
+		"_postman_id": "4e579be2-cbf2-46f1-8c62-864bc2faad41",
+		"name": "Sarpanch API",
+		"description": "This is the API for the Sarpanch App. It is composed of 2 major sections:\r\n\r\n1. Authentication\r\n    * This is built on an phone OTP based verification system for sign up and an username and password based login section. \r\n\r\n2. Content Mangement\r\n    * Content Posts for various schemes, stored in HTML with Rich Text Formatting. ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Validate Phone Number and Send OTP",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "phone_number",
+									"value": "+919871587593",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "abcd1234!",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/accounts/validate_phone_and_send_otp/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"accounts",
+								"validate_phone_and_send_otp",
+								""
+							]
+						},
+						"description": "This allows users to request an OTP and create an account. Then the verification is done through the admin panel to activate the user's account. "
+					},
+					"response": [
+						{
+							"name": "Validate Phone Number and Send OTP",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "phone_number",
+											"value": "+919871587591",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "abcd1234!",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8000/accounts/validate_phone_and_send_otp/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"accounts",
+										"validate_phone_and_send_otp",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 07 Jan 2021 09:07:37 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "98"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"detail\": \"OTP sending error. OTP limit reached. Please contact customer support.\"\n}"
+						},
+						{
+							"name": "Validate Phone Number and Send OTP - Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "phone_number",
+											"value": "+919871587595",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "abcd1234!",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8000/accounts/validate_phone_and_send_otp/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"accounts",
+										"validate_phone_and_send_otp",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 07 Jan 2021 11:28:15 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "48"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"detail\": \"Otp sent successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Validate OTP",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "phone_number",
+									"value": "+919876543210",
+									"type": "text"
+								},
+								{
+									"key": "otp",
+									"value": "5852",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/accounts/validate_otp/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"accounts",
+								"validate_otp",
+								""
+							]
+						},
+						"description": "After the user gets the OTP, this view verifies that the OTP they enter is the correct one. "
+					},
+					"response": [
+						{
+							"name": "Validate OTP - Not sent to entered phone number",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "phone_number",
+											"value": "+919871587523",
+											"type": "text"
+										},
+										{
+											"key": "otp",
+											"value": "9059",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8000/accounts/validate_otp/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"accounts",
+										"validate_otp",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 07 Jan 2021 11:25:25 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "83"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"detail\": \"Phone number does not exist. Please send the otp first.\"\n}"
+						},
+						{
+							"name": "Validate OTP - Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "phone_number",
+											"value": "+919810282179",
+											"type": "text"
+										},
+										{
+											"key": "otp",
+											"value": "3514",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8000/accounts/validate_otp/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"accounts",
+										"validate_otp",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 08 Jan 2021 12:09:27 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"detail\": \"OTP validated. Please proceed to registration.\"\n}"
+						},
+						{
+							"name": "Validate OTP - Bad Input Data",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "phone_number",
+											"value": "+919871587591",
+											"type": "text"
+										},
+										{
+											"key": "otp",
+											"value": "9053",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8000/accounts/validate_otp/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"accounts",
+										"validate_otp",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 07 Jan 2021 11:24:32 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "83"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"detail\": \"Please enter both the phone and the OTP for validation.\"\n}"
+						},
+						{
+							"name": "Validate OTP - Incorrect",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "phone_number",
+											"value": "+919871587591",
+											"type": "text"
+										},
+										{
+											"key": "otp",
+											"value": "9053",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8000/accounts/validate_otp/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"accounts",
+										"validate_otp",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 07 Jan 2021 11:24:16 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "56"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"detail\": \"The OTP entered is incorrect\"\n}"
+						},
+						{
+							"name": "Validate OTP - Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "phone_number",
+											"value": "+919871587591",
+											"type": "text"
+										},
+										{
+											"key": "otp",
+											"value": "9059",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8000/accounts/validate_otp/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"accounts",
+										"validate_otp",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 07 Jan 2021 11:23:59 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"detail\": \"OTP validated. Please proceed to registration.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "phone_number",
+									"value": "+919876543210",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Abcd1234!",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@yopmail.com",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Test Tester",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/accounts/register/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"accounts",
+								"register",
+								""
+							]
+						},
+						"description": "This is the register endpoint. The phone number passed here must have already validated the OTP it got. You must also pass a password here. Verification of matching passwords should be taken care of on the frontend, however, the API will validate the password strength according to a series of parameters and will return an appropriate response to show to the user. "
+					},
+					"response": [
+						{
+							"name": "Register - OTP not validated ",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "phone_number",
+											"value": "+919910231328",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "abcd",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8000/accounts/register/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"accounts",
+										"register",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 08 Jan 2021 12:16:05 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "71"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"detail\": \"Please verify your OTP before registration.\"\n}"
+						},
+						{
+							"name": "Register - Bad Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "phone_number",
+											"value": "+919871587595",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "abcd",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "test@yopmail.com",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "Test Tester",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8000/accounts/register/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"accounts",
+										"register",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 08 Jan 2021 13:11:59 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "190"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"detail\": \"Invalid password: Password should have at least one digit, one uppercase and one lowercase character, one special character, and should be 6 to 20 characters long\"\n}"
+						},
+						{
+							"name": "Register - OTP not requested",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "phone_number",
+											"value": "+919910231322",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "abcd",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8000/accounts/register/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"accounts",
+										"register",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 08 Jan 2021 12:16:21 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"detail\": \"Please request a OTP before registration.\"\n}"
+						},
+						{
+							"name": "Register - Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "phone_number",
+											"value": "+919810282179",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "abcd",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8000/accounts/register/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"accounts",
+										"register",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 08 Jan 2021 12:13:00 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"detail\": \"Account created\"\n}"
+						},
+						{
+							"name": "Register - Bad Data",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "phone_number",
+											"value": "+919810282179",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "abcd",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8000/accounts/register/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"accounts",
+										"register",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 08 Jan 2021 12:12:25 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "79"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"detail\": \"Please enter both the phone number and the password\"\n}"
+						},
+						{
+							"name": "Register - Additional Field",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "phone_number",
+											"value": "+919910231322",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "abcd",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "test@yopmail.com",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "Test Tester",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8000/accounts/register/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"accounts",
+										"register",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 08 Jan 2021 12:16:21 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"detail\": \"Please request a OTP before registration.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "phone",
+									"value": "+919876543210",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Abcd1234!",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/accounts/login/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"accounts",
+								"login",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login - Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "phone",
+											"value": "+919871587582",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "Abcd1234!",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8000/accounts/login/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"accounts",
+										"login",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 08 Jan 2021 13:54:33 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "281"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "sessionid=.eJxVjTsOwjAQBe_iFmTFGzu7pqTnDJHXa-MAcqR8KsTdSaQUUM-8eW_Vh3Up_TqnqR9EXdTJG09oHKEjUOdfziE-U90leYR6H3Uc6zINrHdFH3TWt1HS63q4f4ES5rKtAZJk7DyRJdtlZ1pufQNBGmHYrj1mg-w4MQWJ0AJGRm85is1srVGfL65TOlg:1kxsDp:CJcEfIcEh1fIhinNnxp8nKbMpHMUXCkWgXxPr8YXC-4; expires=Fri, 22 Jan 2021 13:54:33 GMT; HttpOnly; Max-Age=1209600; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "csrftoken=AwB4JYSi42MQOS4dHfQLcKR0aPk4tHv9MH9xJ0AzchyXcFaXEldsuyR7MmQe5p9t; expires=Fri, 07 Jan 2022 13:54:33 GMT; Max-Age=31449600; Path=/; SameSite=Lax"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"expiry\": \"2021-01-15T19:24:33.791971+05:30\",\n    \"token\": \"57ce5bc214b168c3af166416671e1d984eedb9744ff438353c24348a2eb16080\",\n    \"user\": {\n        \"phone\": \"+919871587582\",\n        \"name\": \"Test Tester\",\n        \"date_joined\": \"2021-01-08T19:20:35.539512+05:30\",\n        \"email\": \"test@yopmail.com\",\n        \"is_active\": true,\n        \"avatar\": null\n    }\n}"
+						},
+						{
+							"name": "Login - Wrong Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "phone",
+											"value": "+919871587595",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "abcd1234!",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8000/accounts/login/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"accounts",
+										"login",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 08 Jan 2021 13:12:17 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "91"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": [\n        \"False\"\n    ],\n    \"detail\": [\n        \"Phone number and password do not match. Please try again.\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "Token 57ce5bc214b168c3af166416671e1d984eedb9744ff438353c24348a2eb16080",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/accounts/logout/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"accounts",
+								"logout",
+								""
+							]
+						},
+						"description": "Deletes the Knox token assinged to the current user\r\n"
+					},
+					"response": [
+						{
+							"name": "Logout - Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "localhost:8000/accounts/logout/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"accounts",
+										"logout",
+										""
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 08 Jan 2021 14:03:12 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Change Password",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "Token e2c3d4d8653314586a82832ee065dd1eb8e31e95dad5368797bdabcaff04d10f",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "password_1",
+									"value": "Abcd12345!",
+									"description": "The current password",
+									"type": "text"
+								},
+								{
+									"key": "password_2",
+									"value": "Abcd",
+									"description": "The new password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/accounts/change_password/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"accounts",
+								"change_password",
+								""
+							]
+						},
+						"description": "A logged in user can change thier password. \r\n"
+					},
+					"response": [
+						{
+							"name": "Change Password - Wrong Password",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "password_1",
+											"value": "Abcd1234",
+											"description": "The current password",
+											"type": "text"
+										},
+										{
+											"key": "password_2",
+											"value": "Abcd12345!",
+											"description": "The new password",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8000/accounts/change_password/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"accounts",
+										"change_password",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 08 Jan 2021 14:20:42 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "PUT, PATCH, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "88"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"current_password\": \"The current password does not match your password.\"\n}"
+						},
+						{
+							"name": "Change Password - Success",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "password_1",
+											"value": "Abcd1234!",
+											"description": "The current password",
+											"type": "text"
+										},
+										{
+											"key": "password_2",
+											"value": "Abcd12345!",
+											"description": "The new password",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8000/accounts/change_password/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"accounts",
+										"change_password",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 08 Jan 2021 14:21:04 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "PUT, PATCH, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "66"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"detail\": \"Password has been successfully changed.\"\n}"
+						},
+						{
+							"name": "Change Password - Bad New Password",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "password_1",
+											"value": "Abcd12345!",
+											"description": "The current password",
+											"type": "text"
+										},
+										{
+											"key": "password_2",
+											"value": "Abcd",
+											"description": "The new password",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8000/accounts/change_password/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"accounts",
+										"change_password",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 08 Jan 2021 14:23:33 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "PUT, PATCH, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "190"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"detail\": \"Invalid password: Password should have at least one digit, one uppercase and one lowercase character, one special character, and should be 6 to 20 characters long\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Validate Phone Number and Send OTP for Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "phone",
+									"value": "+919871587593",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/accounts/validate_phone_and_send_forgot_otp/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"accounts",
+								"validate_phone_and_send_forgot_otp",
+								""
+							]
+						},
+						"description": "If a user forget's their password this request validates thier phone number and sends them and OTP which they can verify to change their password. "
+					},
+					"response": [
+						{
+							"name": "Validate Phone Number and Send OTP for Forgot Password - Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "phone",
+											"value": "+919871587593",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8000/accounts/validate_phone_and_send_forgot_otp/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"accounts",
+										"validate_phone_and_send_forgot_otp",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 08 Jan 2021 15:30:37 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"detail\": \"OTP has been sent for password reset\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Validate Forgotten Password OTP",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "phone",
+									"value": "+919871587593",
+									"type": "text"
+								},
+								{
+									"key": "otp",
+									"value": "5532",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/accounts/validate_forgot_otp/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"accounts",
+								"validate_forgot_otp",
+								""
+							]
+						},
+						"description": "Send the phone and OTP after requesting a forgotten password otp here. "
+					},
+					"response": [
+						{
+							"name": "Validate Forgotten Password OTP - Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "phone",
+											"value": "+919871587593",
+											"type": "text"
+										},
+										{
+											"key": "otp",
+											"value": "5532",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8000/accounts/validate_forgot_otp/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"accounts",
+										"validate_forgot_otp",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 08 Jan 2021 15:34:01 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "77"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"detail\": \"OTP matched, please proceed to create new password\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Change Forgotten Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "phone",
+									"value": "+919871587593",
+									"type": "text"
+								},
+								{
+									"key": "otp",
+									"value": "5532",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Abcd1234!",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/accounts/change_forgotten_password/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"accounts",
+								"change_forgotten_password",
+								""
+							],
+							"query": [
+								{
+									"key": "phone",
+									"value": "+919871587593",
+									"disabled": true
+								},
+								{
+									"key": "otp",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Change Forgotten Password - Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "phone",
+											"value": "+919871587593",
+											"type": "text"
+										},
+										{
+											"key": "otp",
+											"value": "5532",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "Abcd1234!",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8000/accounts/change_forgotten_password/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"accounts",
+										"change_forgotten_password",
+										""
+									],
+									"query": [
+										{
+											"key": "phone",
+											"value": "+919871587593",
+											"disabled": true
+										},
+										{
+											"key": "otp",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 08 Jan 2021 15:36:21 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "70"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"detail\": \"Password changed successfully. Please Login\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Content Management",
+			"item": [
+				{
+					"name": "Posts List",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "Token c29631d7c9bce9a258eb75fe2135790c5dd425b6b1331cbce02832f485f57c66",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/content/posts/?limit=10&offset=1&search=Pradhan Mantri",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"content",
+								"posts",
+								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "categories",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "created_before",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "title_contains",
+									"value": "mudra",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "Pradhan Mantri"
+								}
+							]
+						},
+						"description": "This request returns the list of all the recipes. \r\n\r\n# Use with caution\r\nThe payload size of this request is very large, hence it is *strongly* reccomended that you use the ?limit=n query parameter to get certain recipes at a time. \r\n\r\n## How to use the pagination query parameters? \r\nThe two pagination query params are ?limit and ?offset. \r\nThey are best described: \r\n    The client includes both a \"limit\" and an \"offset\" query parameter. The limit indicates the maximum number of items to return, and is equivalent to the page_size in other styles. The offset indicates the starting position of the query in relation to the complete set of unpaginated items.\r\n\r\n## How to use the filtering query params? \r\nThe following are the names of the q params that you can use to filter the data. Use these in conjunction with the pagniation tools so obtain a filtered, paginated queryset. \r\n\r\n* ?title_contains= (if the title contains this param)\r\n* ?category= (equality filter)\r\n* ?region= (equality filter)\r\n* ?created_before= (less than filter)\r\n* ?updated_before= (less than filter)\r\netc. \r\n\r\n\r\n**Note:** time based filters must be entered in the following time format\r\nSupports both Django (‘%d %H:%M:%S.%f’) and ISO 8601 formatted durations (but only the sections that are accepted by Python’s timedelta, so no year, month, and week designators, e.g. ‘P3DT10H22M’).\r\n\r\n### Search \r\nThis returns all recipes given a general search string. Use the `?search=` query parameter."
+					},
+					"response": [
+						{
+							"name": "Posts List - With Pagination ",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/content/posts/?limit=10&offset=1",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"content",
+										"posts",
+										""
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "offset",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 16 Jan 2021 21:46:53 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "20500"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"title\": \"Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)\",\n        \"sub_title\": \"Post Sub Title\",\n        \"slug\": \"pradhan-mantri-kisan-samman-nidhi-pm-kisan-2021-01-15-18-14-40\",\n        \"thumbnail\": \"https://sarpanch-assets.s3.amazonaws.com/media/public/thumbnails/Square_200x200.png\",\n        \"content\": \"<p style=\\\"text-align:center\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#0000ff\\\"><span style=\\\"background-color:#ffffff\\\">Ministry of Finance initiative meant to increase financial inclusion by making it easier to access financial services.</span></span></span></span></p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff9900\\\"><span style=\\\"background-color:#ffffff\\\"><u>How can you benefit from PMJDY?</u></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff9900\\\"><span style=\\\"background-color:#ffffff\\\">Gives you the opportunity to become financially independent and capable.</span></span></span></span>\\r\\n\\r\\n\\t<ul>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff9900\\\"><span style=\\\"background-color:#ffffff\\\">This makes it easier to get loans, safely save your money in a bank account, and more.</span></span></span></span></li>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff9900\\\"><span style=\\\"background-color:#ffffff\\\">If you care about your money, it is important that you keep it safe through such financial mechanisms.</span></span></span></span></li>\\r\\n\\t</ul>\\r\\n\\t</li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\"><u>Description:</u></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\">PMJDY ensures Indian citizens with access to financial Banking Services, Deposit Accounts, Remittances, Credit, Insurance, and Pension in an affordable and easily accessible way.</span></span></span></span></li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#9900ff\\\"><span style=\\\"background-color:#ffffff\\\"><u>Best features of PMJDY:</u></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#9900ff\\\"><span style=\\\"background-color:#ffffff\\\">PMJDY makes the complex process of becoming financially responsible much easier by providing guidance and assistance.</span></span></span></span></li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><u>Instructions:</u></span></span></span></span></p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><strong>This initiative is intended for all Indian citizens, including minors 10 years or older who can start accounts with a guardian.</strong></span></span></span></span></p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<ol>\\r\\n\\t<li style=\\\"list-style-type:decimal\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">Open a Basic Savings Bank Account (BSBD) by going to your nearest Savings Bank of India branch (SBI).</span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:decimal\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">Once you have a BSBD account, select the financial services you would like to access.</span></span></span></span></li>\\r\\n</ol>\",\n        \"created_on\": \"2021-01-15T23:44:40.631661+05:30\",\n        \"updated_on\": \"2021-01-17T02:59:49.240382+05:30\"\n    },\n    {\n        \"title\": \"Pradhan Mantri Mudra Yojna (PMMY)\",\n        \"sub_title\": \"Ministry of Finance initiative that allows one to take out loans without paying processing fees or providing collateral for use in small-sized non-farm enterprises.\",\n        \"slug\": \"pradhan-mantri-mudra-yojna-pmmy-2021-01-16-21-44-04\",\n        \"thumbnail\": \"https://sarpanch-assets.s3.amazonaws.com/media/public/thumbnails/Square_200x200_vxqv0FD.png\",\n        \"content\": \"<p style=\\\"text-align:center\\\"><span style=\\\"font-size:13.999999999999998pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#000000\\\"><span style=\\\"background-color:#ffffff\\\"><strong>Pradhan Mantri Mudra Yojna (PMMY)</strong></span></span></span></span></p>\\r\\n\\r\\n<p style=\\\"text-align:center\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#0000ff\\\"><span style=\\\"background-color:#ffffff\\\">Ministry of Finance initiative that allows one to take out loans without paying processing fees or providing collateral for use in small-sized non-farm enterprises.&nbsp;</span></span></span></span></p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff9900\\\"><span style=\\\"background-color:#ffffff\\\"><u>How can you benefit from PMMY?</u></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff9900\\\"><span style=\\\"background-color:#ffffff\\\">Provides Financial Assistance to help you achieve your business goals.</span></span></span></span>\\r\\n\\r\\n\\t<ul>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff9900\\\"><span style=\\\"background-color:#ffffff\\\">Provides a range of loans to help with whatever type and size of venture you are working on.</span></span></span></span></li>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff9900\\\"><span style=\\\"background-color:#ffffff\\\">Doesn&rsquo;t require collateral or payment of processing fees - minimizes risks.</span></span></span></span></li>\\r\\n\\t</ul>\\r\\n\\t</li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\"><u>Description:</u></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\">There is no minimum loan size under the PMMY scheme, but the maximum loan size that can be taken out under the is of Rs.10 Lakh.&nbsp;</span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\">Borrowers don&rsquo;t need to pay any processing fees or provide any form of collateral.&nbsp;</span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\">Mudra loans can be offered to enterprises in the non-farm sector and in allied agricultural activities.</span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\">3 Types of Mudra Loans:</span></span></span></span>\\r\\n\\t<ul>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\"><u>Shishu:</u></span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\"> Loans sanctioned under the PMMY scheme up to Rs.50000</span></span></span></span></li>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\"><u>Kishore:</u></span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\"> Loans sanctioned under the PMMY scheme from Rs.50001 up to Rs.5.00 lakh</span></span></span></span></li>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\"><u>Tarun:</u></span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\"> Loans sanctioned under the PMMY scheme Rs.5,00,001 up to Rs.10.00 lakh</span></span></span></span></li>\\r\\n\\t</ul>\\r\\n\\t</li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#9900ff\\\"><span style=\\\"background-color:#ffffff\\\"><u>Best Features of PMMY:</u></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#9900ff\\\"><span style=\\\"background-color:#ffffff\\\">No collateral or processing fees need to be provided</span></span></span></span>\\r\\n\\r\\n\\t<ul>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#9900ff\\\"><span style=\\\"background-color:#ffffff\\\">Makes it cheaper and safer for you to apply for these loans.</span></span></span></span></li>\\r\\n\\t</ul>\\r\\n\\t</li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#9900ff\\\"><span style=\\\"background-color:#ffffff\\\">PMMY loans can be applied to a range of activities in a range of sectors, giving you the option to apply no matter the field your activity falls under.</span></span></span></span></li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><u>Instructions:</u></span></span></span></span></p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><strong>To get a PMMY loan, you must fulfill this criteria:</strong></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><strong>A non-farm enterprises</strong></span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><strong>A Micro and Small Enterprises</strong></span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><strong>Engaged in income generating activities</strong></span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><strong>Engaged in &ldquo;income-generating activities&rdquo; and &ldquo;manufacturing, trading services&rdquo;</strong></span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><strong>Have credit needs up to Rs.10 Lakh</strong></span></span></span></span></li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">These loans are available at Commercial Banks, Regional Rural Banks (RRBs), Small-Finance Banks, Microfinance Institutions (MFIs), and Nonbank Financial Companies (NBFCs).</span></span></span></span></p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">For </span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><u>Physical Enrollment:</u></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">The borrower can approach any of the above-mentioned institutions.</span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">Go to </span></span></span></span><a href=\\\"https://mudra.org.in/Home/PMMYBankersKit\\\" style=\\\"text-decoration:none\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#1155cc\\\"><span style=\\\"background-color:#ffffff\\\"><u>https://mudra.org.in/Home/PMMYBankersKit</u></span></span></span></span></a>\\r\\n\\t<ul>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">Download the form for the type of loan you would like.</span></span></span></span></li>\\r\\n\\t</ul>\\r\\n\\t</li>\\r\\n</ul>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><img src=\\\"https://lh6.googleusercontent.com/TXs8u2qsVRa1XYkI9sskrcju65J6ozMsn-1V-P6VhINqrwEs9sj0mDH-4bSYbarqoImSDMPutZhkON_3uPDDkZkQWiFdFlIVlFiK1e31kyV2CllJlhciFW3GVYZ0KKtsZLuRbf7L\\\" style=\\\"height:93px; width:601px\\\" /></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">Before approaching, ensure that you fulfill all requirements on the checklist.</span></span></span></span></li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p style=\\\"text-align:center\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><img src=\\\"https://lh6.googleusercontent.com/dpNEzBy_BRGmL0frQjimY7pI9UoeIjkoVrwHs_H7QXgOJwflmdI0WrbfxmasQnyth1CRZrYqkDQDWkaIZMrlyOt2ZE5xKQVgE9VmjXWUwLdatFvYxLZik-PsrIa8_digpQxx682J\\\" style=\\\"height:522px; width:455px\\\" /></span></span></span></span></p>\\r\\n\\r\\n<p><br />\\r\\n&nbsp;</p>\\r\\n\\r\\n<p style=\\\"text-align:center\\\"><span style=\\\"font-size:16pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#000000\\\"><span style=\\\"background-color:#ffffff\\\">THE CLOSEST ONE TO YOU LOCATOR</span></span></span></span></p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">For </span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><u>Online Enrollment:</u></span></span></span></span></p>\\r\\n\\r\\n<ol>\\r\\n\\t<li style=\\\"list-style-type:decimal\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">The borrower can apply online via the portal at </span></span></span></span><a href=\\\"http://www.udyamimitra.in\\\" style=\\\"text-decoration:none\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#1155cc\\\"><span style=\\\"background-color:#ffffff\\\"><u>www.udyamimitra.in</u></span></span></span></span></a></li>\\r\\n\\t<li style=\\\"list-style-type:decimal\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">Press on the APPLY NOW button in the </span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><em>Mudra Loans</em></span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"> section.</span></span></span></span></li>\\r\\n</ol>\\r\\n\\r\\n<p style=\\\"text-align:center\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><img src=\\\"https://lh4.googleusercontent.com/W_HXFnjtNjUcj1wjnoVz2_d9zl5KeJH2aUnj2J1UkJgIJwIrzCwwkAY1zGRTV8hJKeHKlGvU5QIV121ruoP3oUQeWKYteeAjlJxyo7FQM-Pz5oNECOlqN_dGQeJLHEARM0sUEVtw\\\" style=\\\"height:180px; width:602px\\\" /></span></span></span></span></p>\\r\\n\\r\\n<ol start=\\\"3\\\">\\r\\n\\t<li style=\\\"list-style-type:decimal\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">Scroll down to the </span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><em>Apply for MUDRA Loan </em></span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">and click the&nbsp;</span></span></span></span></li>\\r\\n</ol>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><em><img src=\\\"https://lh5.googleusercontent.com/A-StkTAV8eWLe49W_3tWUtMjlPxuCrmUFWKtuOqj5OrtZFf3l5tZaXT4mfp37lR9waBiwfvSx6CLX7dn-AzcxYXyLQPaVY5TPkIAZ2sc0zEDY1Q8y1bmMcCZMdugZXtswyzNx6jK\\\" style=\\\"height:141px; width:619px\\\" /></em></span></span></span></span></p>\\r\\n\\r\\n<ol start=\\\"4\\\">\\r\\n\\t<li style=\\\"list-style-type:decimal\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">If you are not Sidbi/UdyamiMitra Member yet,&nbsp;</span></span></span></span>\\r\\n\\r\\n\\t<ol>\\r\\n\\t\\t<li style=\\\"list-style-type:lower-alpha\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">You will need to create an account. Put your name, email address, and phone number</span></span></span></span></li>\\r\\n\\t\\t<li style=\\\"list-style-type:lower-alpha\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">You should shortly receive an email or a text message with your OTP code.</span></span></span></span></li>\\r\\n\\t\\t<li style=\\\"list-style-type:lower-alpha\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">From there you should be allowed to create your account.</span></span></span></span></li>\\r\\n\\t</ol>\\r\\n\\t</li>\\r\\n</ol>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p style=\\\"margin-left:96px; text-align:center\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><img src=\\\"https://lh4.googleusercontent.com/lne-aezlh_fb7icRYqQRC041R9emN4jimRPdRjrhkEJicR8AE3gn-Cdw85GpS6KUBj28GejacDatO6xxa_0OsHvlfee6RvOmyxS4ehE1lm1TNa4K6WOq_6CcudXQgQzg8Ql2G6so\\\" style=\\\"height:251px; width:519px\\\" /></span></span></span></span></p>\\r\\n\\r\\n<p>&nbsp;</p>\",\n        \"created_on\": \"2021-01-17T03:14:03.937623+05:30\",\n        \"updated_on\": \"2021-01-17T03:15:32.569426+05:30\"\n    }\n]"
+						},
+						{
+							"name": "Posts List - Filters",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/content/posts/?limit=10&offset=1&title_contains=mudra",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"content",
+										"posts",
+										""
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "offset",
+											"value": "1"
+										},
+										{
+											"key": "categories",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "created_before",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "title_contains",
+											"value": "mudra"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 16 Jan 2021 22:03:49 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "16223"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"title\": \"Pradhan Mantri Mudra Yojna (PMMY)\",\n        \"sub_title\": \"Ministry of Finance initiative that allows one to take out loans without paying processing fees or providing collateral for use in small-sized non-farm enterprises.\",\n        \"slug\": \"pradhan-mantri-mudra-yojna-pmmy-2021-01-16-21-44-04\",\n        \"thumbnail\": \"https://sarpanch-assets.s3.amazonaws.com/media/public/thumbnails/Square_200x200_vxqv0FD.png\",\n        \"content\": \"<p style=\\\"text-align:center\\\"><span style=\\\"font-size:13.999999999999998pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#000000\\\"><span style=\\\"background-color:#ffffff\\\"><strong>Pradhan Mantri Mudra Yojna (PMMY)</strong></span></span></span></span></p>\\r\\n\\r\\n<p style=\\\"text-align:center\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#0000ff\\\"><span style=\\\"background-color:#ffffff\\\">Ministry of Finance initiative that allows one to take out loans without paying processing fees or providing collateral for use in small-sized non-farm enterprises.&nbsp;</span></span></span></span></p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff9900\\\"><span style=\\\"background-color:#ffffff\\\"><u>How can you benefit from PMMY?</u></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff9900\\\"><span style=\\\"background-color:#ffffff\\\">Provides Financial Assistance to help you achieve your business goals.</span></span></span></span>\\r\\n\\r\\n\\t<ul>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff9900\\\"><span style=\\\"background-color:#ffffff\\\">Provides a range of loans to help with whatever type and size of venture you are working on.</span></span></span></span></li>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff9900\\\"><span style=\\\"background-color:#ffffff\\\">Doesn&rsquo;t require collateral or payment of processing fees - minimizes risks.</span></span></span></span></li>\\r\\n\\t</ul>\\r\\n\\t</li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\"><u>Description:</u></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\">There is no minimum loan size under the PMMY scheme, but the maximum loan size that can be taken out under the is of Rs.10 Lakh.&nbsp;</span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\">Borrowers don&rsquo;t need to pay any processing fees or provide any form of collateral.&nbsp;</span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\">Mudra loans can be offered to enterprises in the non-farm sector and in allied agricultural activities.</span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\">3 Types of Mudra Loans:</span></span></span></span>\\r\\n\\t<ul>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\"><u>Shishu:</u></span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\"> Loans sanctioned under the PMMY scheme up to Rs.50000</span></span></span></span></li>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\"><u>Kishore:</u></span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\"> Loans sanctioned under the PMMY scheme from Rs.50001 up to Rs.5.00 lakh</span></span></span></span></li>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\"><u>Tarun:</u></span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\"> Loans sanctioned under the PMMY scheme Rs.5,00,001 up to Rs.10.00 lakh</span></span></span></span></li>\\r\\n\\t</ul>\\r\\n\\t</li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#9900ff\\\"><span style=\\\"background-color:#ffffff\\\"><u>Best Features of PMMY:</u></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#9900ff\\\"><span style=\\\"background-color:#ffffff\\\">No collateral or processing fees need to be provided</span></span></span></span>\\r\\n\\r\\n\\t<ul>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#9900ff\\\"><span style=\\\"background-color:#ffffff\\\">Makes it cheaper and safer for you to apply for these loans.</span></span></span></span></li>\\r\\n\\t</ul>\\r\\n\\t</li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#9900ff\\\"><span style=\\\"background-color:#ffffff\\\">PMMY loans can be applied to a range of activities in a range of sectors, giving you the option to apply no matter the field your activity falls under.</span></span></span></span></li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><u>Instructions:</u></span></span></span></span></p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><strong>To get a PMMY loan, you must fulfill this criteria:</strong></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><strong>A non-farm enterprises</strong></span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><strong>A Micro and Small Enterprises</strong></span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><strong>Engaged in income generating activities</strong></span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><strong>Engaged in &ldquo;income-generating activities&rdquo; and &ldquo;manufacturing, trading services&rdquo;</strong></span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><strong>Have credit needs up to Rs.10 Lakh</strong></span></span></span></span></li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">These loans are available at Commercial Banks, Regional Rural Banks (RRBs), Small-Finance Banks, Microfinance Institutions (MFIs), and Nonbank Financial Companies (NBFCs).</span></span></span></span></p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">For </span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><u>Physical Enrollment:</u></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">The borrower can approach any of the above-mentioned institutions.</span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">Go to </span></span></span></span><a href=\\\"https://mudra.org.in/Home/PMMYBankersKit\\\" style=\\\"text-decoration:none\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#1155cc\\\"><span style=\\\"background-color:#ffffff\\\"><u>https://mudra.org.in/Home/PMMYBankersKit</u></span></span></span></span></a>\\r\\n\\t<ul>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">Download the form for the type of loan you would like.</span></span></span></span></li>\\r\\n\\t</ul>\\r\\n\\t</li>\\r\\n</ul>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><img src=\\\"https://lh6.googleusercontent.com/TXs8u2qsVRa1XYkI9sskrcju65J6ozMsn-1V-P6VhINqrwEs9sj0mDH-4bSYbarqoImSDMPutZhkON_3uPDDkZkQWiFdFlIVlFiK1e31kyV2CllJlhciFW3GVYZ0KKtsZLuRbf7L\\\" style=\\\"height:93px; width:601px\\\" /></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">Before approaching, ensure that you fulfill all requirements on the checklist.</span></span></span></span></li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p style=\\\"text-align:center\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><img src=\\\"https://lh6.googleusercontent.com/dpNEzBy_BRGmL0frQjimY7pI9UoeIjkoVrwHs_H7QXgOJwflmdI0WrbfxmasQnyth1CRZrYqkDQDWkaIZMrlyOt2ZE5xKQVgE9VmjXWUwLdatFvYxLZik-PsrIa8_digpQxx682J\\\" style=\\\"height:522px; width:455px\\\" /></span></span></span></span></p>\\r\\n\\r\\n<p><br />\\r\\n&nbsp;</p>\\r\\n\\r\\n<p style=\\\"text-align:center\\\"><span style=\\\"font-size:16pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#000000\\\"><span style=\\\"background-color:#ffffff\\\">THE CLOSEST ONE TO YOU LOCATOR</span></span></span></span></p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">For </span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><u>Online Enrollment:</u></span></span></span></span></p>\\r\\n\\r\\n<ol>\\r\\n\\t<li style=\\\"list-style-type:decimal\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">The borrower can apply online via the portal at </span></span></span></span><a href=\\\"http://www.udyamimitra.in\\\" style=\\\"text-decoration:none\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#1155cc\\\"><span style=\\\"background-color:#ffffff\\\"><u>www.udyamimitra.in</u></span></span></span></span></a></li>\\r\\n\\t<li style=\\\"list-style-type:decimal\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">Press on the APPLY NOW button in the </span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><em>Mudra Loans</em></span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"> section.</span></span></span></span></li>\\r\\n</ol>\\r\\n\\r\\n<p style=\\\"text-align:center\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><img src=\\\"https://lh4.googleusercontent.com/W_HXFnjtNjUcj1wjnoVz2_d9zl5KeJH2aUnj2J1UkJgIJwIrzCwwkAY1zGRTV8hJKeHKlGvU5QIV121ruoP3oUQeWKYteeAjlJxyo7FQM-Pz5oNECOlqN_dGQeJLHEARM0sUEVtw\\\" style=\\\"height:180px; width:602px\\\" /></span></span></span></span></p>\\r\\n\\r\\n<ol start=\\\"3\\\">\\r\\n\\t<li style=\\\"list-style-type:decimal\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">Scroll down to the </span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><em>Apply for MUDRA Loan </em></span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">and click the&nbsp;</span></span></span></span></li>\\r\\n</ol>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><em><img src=\\\"https://lh5.googleusercontent.com/A-StkTAV8eWLe49W_3tWUtMjlPxuCrmUFWKtuOqj5OrtZFf3l5tZaXT4mfp37lR9waBiwfvSx6CLX7dn-AzcxYXyLQPaVY5TPkIAZ2sc0zEDY1Q8y1bmMcCZMdugZXtswyzNx6jK\\\" style=\\\"height:141px; width:619px\\\" /></em></span></span></span></span></p>\\r\\n\\r\\n<ol start=\\\"4\\\">\\r\\n\\t<li style=\\\"list-style-type:decimal\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">If you are not Sidbi/UdyamiMitra Member yet,&nbsp;</span></span></span></span>\\r\\n\\r\\n\\t<ol>\\r\\n\\t\\t<li style=\\\"list-style-type:lower-alpha\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">You will need to create an account. Put your name, email address, and phone number</span></span></span></span></li>\\r\\n\\t\\t<li style=\\\"list-style-type:lower-alpha\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">You should shortly receive an email or a text message with your OTP code.</span></span></span></span></li>\\r\\n\\t\\t<li style=\\\"list-style-type:lower-alpha\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">From there you should be allowed to create your account.</span></span></span></span></li>\\r\\n\\t</ol>\\r\\n\\t</li>\\r\\n</ol>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p style=\\\"margin-left:96px; text-align:center\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><img src=\\\"https://lh4.googleusercontent.com/lne-aezlh_fb7icRYqQRC041R9emN4jimRPdRjrhkEJicR8AE3gn-Cdw85GpS6KUBj28GejacDatO6xxa_0OsHvlfee6RvOmyxS4ehE1lm1TNa4K6WOq_6CcudXQgQzg8Ql2G6so\\\" style=\\\"height:251px; width:519px\\\" /></span></span></span></span></p>\\r\\n\\r\\n<p>&nbsp;</p>\",\n        \"created_on\": \"2021-01-17T03:14:03.937623+05:30\",\n        \"updated_on\": \"2021-01-17T03:30:02.539046+05:30\",\n        \"categories\": [\n            3\n        ]\n    }\n]"
+						},
+						{
+							"name": "Posts List - Search",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/content/posts/?limit=10&offset=1&search=Pradhan Mantri",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"content",
+										"posts",
+										""
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "offset",
+											"value": "1"
+										},
+										{
+											"key": "categories",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "created_before",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "title_contains",
+											"value": "mudra",
+											"disabled": true
+										},
+										{
+											"key": "search",
+											"value": "Pradhan Mantri"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 16 Jan 2021 22:04:41 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "20536"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"title\": \"Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)\",\n        \"sub_title\": \"Post Sub Title\",\n        \"slug\": \"pradhan-mantri-kisan-samman-nidhi-pm-kisan-2021-01-15-18-14-40\",\n        \"thumbnail\": \"https://sarpanch-assets.s3.amazonaws.com/media/public/thumbnails/Square_200x200.png\",\n        \"content\": \"<p style=\\\"text-align:center\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#0000ff\\\"><span style=\\\"background-color:#ffffff\\\">Ministry of Finance initiative meant to increase financial inclusion by making it easier to access financial services.</span></span></span></span></p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff9900\\\"><span style=\\\"background-color:#ffffff\\\"><u>How can you benefit from PMJDY?</u></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff9900\\\"><span style=\\\"background-color:#ffffff\\\">Gives you the opportunity to become financially independent and capable.</span></span></span></span>\\r\\n\\r\\n\\t<ul>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff9900\\\"><span style=\\\"background-color:#ffffff\\\">This makes it easier to get loans, safely save your money in a bank account, and more.</span></span></span></span></li>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff9900\\\"><span style=\\\"background-color:#ffffff\\\">If you care about your money, it is important that you keep it safe through such financial mechanisms.</span></span></span></span></li>\\r\\n\\t</ul>\\r\\n\\t</li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\"><u>Description:</u></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\">PMJDY ensures Indian citizens with access to financial Banking Services, Deposit Accounts, Remittances, Credit, Insurance, and Pension in an affordable and easily accessible way.</span></span></span></span></li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#9900ff\\\"><span style=\\\"background-color:#ffffff\\\"><u>Best features of PMJDY:</u></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#9900ff\\\"><span style=\\\"background-color:#ffffff\\\">PMJDY makes the complex process of becoming financially responsible much easier by providing guidance and assistance.</span></span></span></span></li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><u>Instructions:</u></span></span></span></span></p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><strong>This initiative is intended for all Indian citizens, including minors 10 years or older who can start accounts with a guardian.</strong></span></span></span></span></p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<ol>\\r\\n\\t<li style=\\\"list-style-type:decimal\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">Open a Basic Savings Bank Account (BSBD) by going to your nearest Savings Bank of India branch (SBI).</span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:decimal\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">Once you have a BSBD account, select the financial services you would like to access.</span></span></span></span></li>\\r\\n</ol>\",\n        \"created_on\": \"2021-01-15T23:44:40.631661+05:30\",\n        \"updated_on\": \"2021-01-17T02:59:49.240382+05:30\",\n        \"categories\": [\n            1,\n            2\n        ]\n    },\n    {\n        \"title\": \"Pradhan Mantri Mudra Yojna (PMMY)\",\n        \"sub_title\": \"Ministry of Finance initiative that allows one to take out loans without paying processing fees or providing collateral for use in small-sized non-farm enterprises.\",\n        \"slug\": \"pradhan-mantri-mudra-yojna-pmmy-2021-01-16-21-44-04\",\n        \"thumbnail\": \"https://sarpanch-assets.s3.amazonaws.com/media/public/thumbnails/Square_200x200_vxqv0FD.png\",\n        \"content\": \"<p style=\\\"text-align:center\\\"><span style=\\\"font-size:13.999999999999998pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#000000\\\"><span style=\\\"background-color:#ffffff\\\"><strong>Pradhan Mantri Mudra Yojna (PMMY)</strong></span></span></span></span></p>\\r\\n\\r\\n<p style=\\\"text-align:center\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#0000ff\\\"><span style=\\\"background-color:#ffffff\\\">Ministry of Finance initiative that allows one to take out loans without paying processing fees or providing collateral for use in small-sized non-farm enterprises.&nbsp;</span></span></span></span></p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff9900\\\"><span style=\\\"background-color:#ffffff\\\"><u>How can you benefit from PMMY?</u></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff9900\\\"><span style=\\\"background-color:#ffffff\\\">Provides Financial Assistance to help you achieve your business goals.</span></span></span></span>\\r\\n\\r\\n\\t<ul>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff9900\\\"><span style=\\\"background-color:#ffffff\\\">Provides a range of loans to help with whatever type and size of venture you are working on.</span></span></span></span></li>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff9900\\\"><span style=\\\"background-color:#ffffff\\\">Doesn&rsquo;t require collateral or payment of processing fees - minimizes risks.</span></span></span></span></li>\\r\\n\\t</ul>\\r\\n\\t</li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\"><u>Description:</u></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\">There is no minimum loan size under the PMMY scheme, but the maximum loan size that can be taken out under the is of Rs.10 Lakh.&nbsp;</span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\">Borrowers don&rsquo;t need to pay any processing fees or provide any form of collateral.&nbsp;</span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\">Mudra loans can be offered to enterprises in the non-farm sector and in allied agricultural activities.</span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\">3 Types of Mudra Loans:</span></span></span></span>\\r\\n\\t<ul>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\"><u>Shishu:</u></span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\"> Loans sanctioned under the PMMY scheme up to Rs.50000</span></span></span></span></li>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\"><u>Kishore:</u></span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\"> Loans sanctioned under the PMMY scheme from Rs.50001 up to Rs.5.00 lakh</span></span></span></span></li>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\"><u>Tarun:</u></span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#6aa84f\\\"><span style=\\\"background-color:#ffffff\\\"> Loans sanctioned under the PMMY scheme Rs.5,00,001 up to Rs.10.00 lakh</span></span></span></span></li>\\r\\n\\t</ul>\\r\\n\\t</li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#9900ff\\\"><span style=\\\"background-color:#ffffff\\\"><u>Best Features of PMMY:</u></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#9900ff\\\"><span style=\\\"background-color:#ffffff\\\">No collateral or processing fees need to be provided</span></span></span></span>\\r\\n\\r\\n\\t<ul>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#9900ff\\\"><span style=\\\"background-color:#ffffff\\\">Makes it cheaper and safer for you to apply for these loans.</span></span></span></span></li>\\r\\n\\t</ul>\\r\\n\\t</li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#9900ff\\\"><span style=\\\"background-color:#ffffff\\\">PMMY loans can be applied to a range of activities in a range of sectors, giving you the option to apply no matter the field your activity falls under.</span></span></span></span></li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><u>Instructions:</u></span></span></span></span></p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><strong>To get a PMMY loan, you must fulfill this criteria:</strong></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><strong>A non-farm enterprises</strong></span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><strong>A Micro and Small Enterprises</strong></span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><strong>Engaged in income generating activities</strong></span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><strong>Engaged in &ldquo;income-generating activities&rdquo; and &ldquo;manufacturing, trading services&rdquo;</strong></span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><strong>Have credit needs up to Rs.10 Lakh</strong></span></span></span></span></li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">These loans are available at Commercial Banks, Regional Rural Banks (RRBs), Small-Finance Banks, Microfinance Institutions (MFIs), and Nonbank Financial Companies (NBFCs).</span></span></span></span></p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">For </span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><u>Physical Enrollment:</u></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">The borrower can approach any of the above-mentioned institutions.</span></span></span></span></li>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">Go to </span></span></span></span><a href=\\\"https://mudra.org.in/Home/PMMYBankersKit\\\" style=\\\"text-decoration:none\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#1155cc\\\"><span style=\\\"background-color:#ffffff\\\"><u>https://mudra.org.in/Home/PMMYBankersKit</u></span></span></span></span></a>\\r\\n\\t<ul>\\r\\n\\t\\t<li style=\\\"list-style-type:circle\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">Download the form for the type of loan you would like.</span></span></span></span></li>\\r\\n\\t</ul>\\r\\n\\t</li>\\r\\n</ul>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><img src=\\\"https://lh6.googleusercontent.com/TXs8u2qsVRa1XYkI9sskrcju65J6ozMsn-1V-P6VhINqrwEs9sj0mDH-4bSYbarqoImSDMPutZhkON_3uPDDkZkQWiFdFlIVlFiK1e31kyV2CllJlhciFW3GVYZ0KKtsZLuRbf7L\\\" style=\\\"height:93px; width:601px\\\" /></span></span></span></span></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"list-style-type:disc\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">Before approaching, ensure that you fulfill all requirements on the checklist.</span></span></span></span></li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p style=\\\"text-align:center\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><img src=\\\"https://lh6.googleusercontent.com/dpNEzBy_BRGmL0frQjimY7pI9UoeIjkoVrwHs_H7QXgOJwflmdI0WrbfxmasQnyth1CRZrYqkDQDWkaIZMrlyOt2ZE5xKQVgE9VmjXWUwLdatFvYxLZik-PsrIa8_digpQxx682J\\\" style=\\\"height:522px; width:455px\\\" /></span></span></span></span></p>\\r\\n\\r\\n<p><br />\\r\\n&nbsp;</p>\\r\\n\\r\\n<p style=\\\"text-align:center\\\"><span style=\\\"font-size:16pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#000000\\\"><span style=\\\"background-color:#ffffff\\\">THE CLOSEST ONE TO YOU LOCATOR</span></span></span></span></p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">For </span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><u>Online Enrollment:</u></span></span></span></span></p>\\r\\n\\r\\n<ol>\\r\\n\\t<li style=\\\"list-style-type:decimal\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">The borrower can apply online via the portal at </span></span></span></span><a href=\\\"http://www.udyamimitra.in\\\" style=\\\"text-decoration:none\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#1155cc\\\"><span style=\\\"background-color:#ffffff\\\"><u>www.udyamimitra.in</u></span></span></span></span></a></li>\\r\\n\\t<li style=\\\"list-style-type:decimal\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">Press on the APPLY NOW button in the </span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><em>Mudra Loans</em></span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"> section.</span></span></span></span></li>\\r\\n</ol>\\r\\n\\r\\n<p style=\\\"text-align:center\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><img src=\\\"https://lh4.googleusercontent.com/W_HXFnjtNjUcj1wjnoVz2_d9zl5KeJH2aUnj2J1UkJgIJwIrzCwwkAY1zGRTV8hJKeHKlGvU5QIV121ruoP3oUQeWKYteeAjlJxyo7FQM-Pz5oNECOlqN_dGQeJLHEARM0sUEVtw\\\" style=\\\"height:180px; width:602px\\\" /></span></span></span></span></p>\\r\\n\\r\\n<ol start=\\\"3\\\">\\r\\n\\t<li style=\\\"list-style-type:decimal\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">Scroll down to the </span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><em>Apply for MUDRA Loan </em></span></span></span></span><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">and click the&nbsp;</span></span></span></span></li>\\r\\n</ol>\\r\\n\\r\\n<p><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><em><img src=\\\"https://lh5.googleusercontent.com/A-StkTAV8eWLe49W_3tWUtMjlPxuCrmUFWKtuOqj5OrtZFf3l5tZaXT4mfp37lR9waBiwfvSx6CLX7dn-AzcxYXyLQPaVY5TPkIAZ2sc0zEDY1Q8y1bmMcCZMdugZXtswyzNx6jK\\\" style=\\\"height:141px; width:619px\\\" /></em></span></span></span></span></p>\\r\\n\\r\\n<ol start=\\\"4\\\">\\r\\n\\t<li style=\\\"list-style-type:decimal\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">If you are not Sidbi/UdyamiMitra Member yet,&nbsp;</span></span></span></span>\\r\\n\\r\\n\\t<ol>\\r\\n\\t\\t<li style=\\\"list-style-type:lower-alpha\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">You will need to create an account. Put your name, email address, and phone number</span></span></span></span></li>\\r\\n\\t\\t<li style=\\\"list-style-type:lower-alpha\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">You should shortly receive an email or a text message with your OTP code.</span></span></span></span></li>\\r\\n\\t\\t<li style=\\\"list-style-type:lower-alpha\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\">From there you should be allowed to create your account.</span></span></span></span></li>\\r\\n\\t</ol>\\r\\n\\t</li>\\r\\n</ol>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p style=\\\"margin-left:96px; text-align:center\\\"><span style=\\\"font-size:12pt\\\"><span style=\\\"font-family:Arial\\\"><span style=\\\"color:#ff0000\\\"><span style=\\\"background-color:#ffffff\\\"><img src=\\\"https://lh4.googleusercontent.com/lne-aezlh_fb7icRYqQRC041R9emN4jimRPdRjrhkEJicR8AE3gn-Cdw85GpS6KUBj28GejacDatO6xxa_0OsHvlfee6RvOmyxS4ehE1lm1TNa4K6WOq_6CcudXQgQzg8Ql2G6so\\\" style=\\\"height:251px; width:519px\\\" /></span></span></span></span></p>\\r\\n\\r\\n<p>&nbsp;</p>\",\n        \"created_on\": \"2021-01-17T03:14:03.937623+05:30\",\n        \"updated_on\": \"2021-01-17T03:30:02.539046+05:30\",\n        \"categories\": [\n            3\n        ]\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Post Detail",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "Token c29631d7c9bce9a258eb75fe2135790c5dd425b6b1331cbce02832f485f57c66",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/content/posts/1/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"content",
+								"posts",
+								"1",
+								""
+							]
+						},
+						"description": "This gets a single recipe by passing the id or primary key to the URL."
+					},
+					"response": []
+				},
+				{
+					"name": "Category List",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "Token c29631d7c9bce9a258eb75fe2135790c5dd425b6b1331cbce02832f485f57c66",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/content/categories/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"content",
+								"categories",
+								""
+							]
+						},
+						"description": "Returns a list of the active categories."
+					},
+					"response": [
+						{
+							"name": "Category List",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/content/categories/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"content",
+										"categories",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 16 Jan 2021 21:58:40 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "78"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"title\": \"Finance\",\n        \"parent\": null\n    },\n    {\n        \"id\": 2,\n        \"title\": \"Rural\",\n        \"parent\": 1\n    }\n]"
+						}
+					]
+				}
+			],
+			"description": "This section includes all the requests to query and retrive posts about various schemes etc."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://api.sarpanch.org"
+		}
+	]
+}

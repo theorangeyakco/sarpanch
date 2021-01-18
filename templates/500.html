@@ -1,0 +1,21 @@
+{% extends "global/base.html" %}
+{% load static %}
+
+{% block title %}Error 404{% endblock title %}
+
+{% block navbar %} {% endblock navbar %}
+
+{% block content %}
+    <section class="error first">
+        <h1 id="error_h1">500</h1>
+        <h2 id="error_h2">Server Error</h2>
+        <img src="{% static 'common/img/logo_50.png' %}" style="max-width: 300px">
+        <p>Hmm... something went wrong, please try again or contact us below. </p>
+        <div class="buttons">
+            <a href="{% url 'index' %}">Return to safety</a>
+            <a href="mailto:sorobrain.devs@gmail.com?subject=500_error&body=Please send help.">Email Us</a>
+        </div>
+    </section>
+{% endblock content %}
+
+{% block footer %} {% endblock footer %}

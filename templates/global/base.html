@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTY PE html>
+{% block hint %}{% endblock hint %}
+<html lang="en-us">
+<head>
+  {% block meta %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  {% endblock meta %}
+
+  <title>{% block title %}{% endblock title %}</title>
+  <link rel="icon" type="image/png" href="{% static 'common/img/logo-small-round.png' %}">
+  {% block commoncss %}
+  {% endblock commoncss %}
+
+
+  {% block commonjs %}
+  {% endblock commonjs %}
+
+
+  {% block css %}{% endblock css %}
+  {% block extrahead %}{% endblock extrahead %}
+</head>
+
+<body class="d-flex flex-column min-vh-100 {% block bodyclass %}{% endblock bodyclass %}"
+      data-admin-utc-offset="{% now 'Z' %}">
+<div class="flex-grow-1">
+  {% block navbar %}
+  {% endblock navbar %}
+
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }} alert-dismissible fade show mx-2 my-1" role="alert">
+    {{ message|safe }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  {% block content %}{% endblock content %}
+</div>
+
+{% block footer %}
+{% endblock footer %}
+
+{% block js %}{% endblock js %}
+</body>
+</html>

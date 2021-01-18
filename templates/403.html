@@ -1,0 +1,41 @@
+{% extends "global/base.html" %}
+{% load static %}
+
+{% block title %}Error 405{% endblock title %}
+
+{% block css %}
+	<style>
+		.valign-wrapper {
+			height: 80vh;
+		}
+
+		@media all and (max-width: 600px) {
+			#container {
+				margin: auto 6px;
+			}
+
+			h3 {
+				font-size: 32px !important;
+			}
+
+			h5 {
+				font-size: 22px !important;
+			}
+		}
+	</style>
+{% endblock css %}
+
+{% block content %}
+	<div id="container" class="valign-wrapper">
+		<div class="section"></div>
+		<div class="row">
+			<div class="col s12">
+				<h3>Invalid HTTP request!</h3>
+				<h5 style="text-align: center;">
+					This HTTP request method is not allowed on this URL.
+				</h5>
+			</div>
+		</div>
+		<div class="section"></div>
+	</div>
+{% endblock content %}
