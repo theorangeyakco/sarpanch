@@ -145,10 +145,13 @@ INSTALLED_APPS = [
 	'mptt',
 	'django_mptt_admin',
 	'django_filters',
+	'corsheaders',
+
 	# Custom apps
 	'accounts',
 	'content'
 ]
+CORS_ORIGIN_ALLOW_ALL = True
 
 SITE_ID = 2
 
@@ -158,6 +161,7 @@ if DEBUG:
 	]
 
 MIDDLEWARE = [
+	'corsheaders.middleware.CorsMiddleware',
 	'django.middleware.security.SecurityMiddleware',
 	'whitenoise.middleware.WhiteNoiseMiddleware',
 	'django.middleware.csrf.CsrfViewMiddleware',
@@ -205,7 +209,7 @@ REST_FRAMEWORK = {
 
 REST_KNOX = {
 	'USER_SERIALIZER': 'accounts.serializer.UserSerializer',
-	'TOKEN_TTL': timedelta(hours=24*7)
+	'TOKEN_TTL'      : timedelta(hours=24 * 7)
 }
 
 # django taggit settings

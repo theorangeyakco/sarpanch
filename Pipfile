@@ -42,6 +42,7 @@ django-rest-auth = "*"
 django-rest-knox = "*"
 django-mptt = "*"
 django-mptt-admin = "*"
+django-cors-headers = "*"
 
 [requires]
 python_full_version = "3.8.2"
