@@ -29,7 +29,7 @@ class ValidatePhoneAndSendOTP(APIView):
 				return Response({
 					'status': False,
 					'detail': 'User already exists.'
-				})
+				}, status=422)
 			else:
 				key = send_otp(phone)
 				if key:
@@ -41,29 +41,29 @@ class ValidatePhoneAndSendOTP(APIView):
 							return Response({
 								'status': False,
 								'detail': 'OTP sending error. OTP limit reached. Please contact customer support.'
-							})
+							}, status=500)
 						old.count += 1
 						old.save()
 						return Response({
 							'status': True,
 							'detail': 'Otp sent successfully'
-						})
+						}, status=200)
 					else:
 						PhoneOTP.objects.create(phone=phone, otp=key)
 						return Response({
 							'status': True,
 							'detail': 'Otp sent successfully'
-						})
+						}, status=200)
 				else:
 					return Response({
 						'status': False,
 						'detail': 'Error in sending OTP'
-					})
+					}, status=500)
 		else:
 			return Response({
 				'status': False,
 				'detail': 'Phone number has not been provided.'
-			})
+			}, status=422)
 
 
 class ValidateOTP(APIView):
@@ -87,22 +87,22 @@ class ValidateOTP(APIView):
 					return Response({
 						'status': True,
 						'detail': 'OTP validated. Please proceed to registration.'
-					})
+					}, status=200)
 				else:
 					return Response({
 						'status': False,
 						'detail': 'The OTP entered is incorrect'
-					})
+					}, status=500)
 			else:
 				return Response({
 					'status': False,
 					'detail': 'Phone number does not exist. Please send the otp first.'
-				})
+				}, status=500)
 		else:
 			return Response({
 				'status': False,
 				'detail': 'Please enter both the phone and the OTP for validation.'
-			})
+			}, status=500)
 
 
 class Register(APIView):
@@ -115,7 +115,7 @@ class Register(APIView):
 		# REVIEW: What are the other fields that we want to get during
 		#  registration
 
-		if (type(phone) == str and type(password) == str and type(name) == str and type(email) == str):
+		if type(phone) == str and type(password) == str and type(name) == str and type(email) == str:
 			old = PhoneOTP.objects.filter(phone__iexact=phone)
 			if old.exists():
 				old = old.first()
@@ -134,28 +134,28 @@ class Register(APIView):
 						return Response({
 							'status': True,
 							'detail': 'Account created'
-						})
+						}, status=200)
 					else:
 						return Response({
 							'status': False,
 							'detail': 'Invalid password: Password should have at least one digit, one uppercase and one'
 							          ' lowercase character, one special character, and should be 6 to 20 characters long'
-						})
+						}, status=500)
 				else:
 					return Response({
 						'status': False,
 						'detail': 'Please verify your OTP before registration.'
-					})
+					}, status=500)
 			else:
 				return Response({
 					'status': False,
 					'detail': 'Please request a OTP before registration.'
-				})
+				}, status=500)
 		else:
 			return Response({
 				'status': False,
 				'detail': 'Please enter both the phone number and the password'
-			})
+			}, status=500)
 
 
 class Login(KnoxLoginView):
@@ -163,7 +163,11 @@ class Login(KnoxLoginView):
 
 	def post(self, request, format=None):
 		serializer = LoginSerializer(data=request.data)
-		serializer.is_valid(raise_exception=True)
+		if not serializer.is_valid():
+			error_list = [serializer.errors[error][0] for error in serializer.errors]
+			print(error_list)
+			return Response({'status': False, 'detail': error_list[1]})
+
 		user = serializer.validated_data['user']
 		if user.last_login is None:
 			user.first_login = True
@@ -208,7 +212,7 @@ class ChangePassword(generics.UpdateAPIView):
 					'status': False,
 					'detail': 'Invalid password: Password should have at least one digit, one uppercase and one'
 					          ' lowercase character, one special character, and should be 6 to 20 characters long'
-				})
+				}, status=422)
 
 			self.object.set_password(serializer.data.get('password_2'))
 			self.object.password_changed = True
@@ -216,7 +220,7 @@ class ChangePassword(generics.UpdateAPIView):
 			return Response({
 				"status": True,
 				"detail": "Password has been successfully changed.",
-			})
+			}, status=200)
 
 		return Response(serializer.error, status=status.HTTP_400_BAD_REQUEST)
 
@@ -244,12 +248,12 @@ class ValidatePhoneForgot(APIView):
 							return Response({
 								'status': False,
 								'detail': 'Maximum otp limits reached. Kindly support our customer care or try with different number'
-							})
+							}, status=500)
 						old.count = k + 1
 						old.save()
 
 						return Response({'status': True,
-						                 'detail': 'OTP has been sent for password reset. Limits about to reach.'})
+						                 'detail': 'OTP has been sent for password reset. Limits about to reach.'}, status=200)
 
 					else:
 						count = count + 1
@@ -261,17 +265,17 @@ class ValidatePhoneForgot(APIView):
 								forgot=True,
 
 						)
-						return Response({'status': True, 'detail': 'OTP has been sent for password reset'})
+						return Response({'status': True, 'detail': 'OTP has been sent for password reset'}, status=200)
 
 				else:
 					return Response({
-						'status': 'False', 'detail': "OTP sending error. Please try after some time."
-					})
+						'status': False, 'detail': "OTP sending error. Please try after some time."
+					}, status=500)
 			else:
 				return Response({
 					'status': False,
 					'detail': 'Phone number not recognised. Kindly try a new account for this number'
-				})
+				}, status=500)
 
 
 class ForgotValidateOTP(APIView):
@@ -291,7 +295,7 @@ class ForgotValidateOTP(APIView):
 					return Response({
 						'status': False,
 						'detail': 'Please get and otp to reset you password first.'
-					})
+					}, status=500)
 
 				otp = old.otp
 				if str(otp) == str(otp_sent):
@@ -301,22 +305,22 @@ class ForgotValidateOTP(APIView):
 					return Response({
 						'status': True,
 						'detail': 'OTP matched, please proceed to create new password'
-					})
+					}, status=200)
 				else:
 					return Response({
 						'status': False,
 						'detail': 'OTP incorrect, please try again'
-					})
+					}, status=500)
 			else:
 				return Response({
 					'status': False,
 					'detail': 'Phone not recognised. Please request a new otp with this number'
-				})
+				}, status=500)
 		else:
 			return Response({
 				'status': 'False',
 				'detail': 'Either phone or otp was not received in Post request'
-			})
+			}, status=500)
 
 
 class ForgetPasswordChange(APIView):
@@ -349,19 +353,19 @@ class ForgetPasswordChange(APIView):
 						return Response({
 							'status': True,
 							'detail': 'Password changed successfully. Please Login'
-						})
+						}, status=200)
 				else:
 					return Response({
 						'status': False,
 						'detail': 'OTP Verification failed. Please try again in previous step'
-					})
+					}, status=500)
 			else:
 				return Response({
 					'status': False,
 					'detail': 'Phone and otp are do not match or a new phone has entered. Request a new otp in forgot password'
-				})
+				}, status=500)
 		else:
 			return Response({
 				'status': False,
 				'detail': 'Post request parameters missing.'
-			})
+			}, status=500)
